@@ -1,0 +1,75 @@
+﻿<section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Expandable Table Tree</h3>
+              </div>
+              <!-- ./card-header -->
+              <div class="card-body p-0">
+                <table class="table table-hover">
+                    <tbody>
+                        <!-- foreach items @object-->
+                        @foreach (object programTreeView in @programSet)
+                        {
+                            @if (programTreeView.LevelNo == 1)
+                            {
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                    <td>
+                                        <button type="button" class="btn btn-primary p-0">
+                                            <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                        </button>
+                                        @if (@programTreeView.ProgramName != "")
+                                        {
+                                            @programTreeView.ProgramName
+                                        }
+                                        else
+                                        {
+                                            @programTreeView.ProgramId
+                                            @textEmpty
+                                        }
+                                    </td>
+                                </tr>
+                            }
+
+                                <tr class="expandable-body d-none">
+                                    <td>
+                                        <div class="p-0" style="display: none;">
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                    @foreach (object programTreeViewSub in @programSet)
+                                                    {
+                                                        @if (!(programTreeViewSub.LevelNo == 1))
+                                                        {
+                                                                @if (programTreeViewSub.Parent == programTreeView.ProgramId)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        @programTreeViewSub.ProgramName
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }                               
+                                                </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                                </tr>
+
+                        }
+                        <tr>
+                            <td>982</td>
+                        </tr>
+                    </tbody>
+                </table>
+               </div>
+              <!-- /.card-body -->
+              </div>
+            <!-- /.card -->
+            </div>
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
